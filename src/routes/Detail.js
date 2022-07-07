@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Movie from "../components/Movie";
 
 function Detail() {
@@ -10,32 +10,36 @@ function Detail() {
     const json = await (
       await fetch(`https://yts.mx/api/v2/movie_details.json?movie_id=${id}`)
     ).json();
-    console.log(json);
-    setMovieDetail(json.data.movieDetail);
+    console.log(json.data.movie);
+    setMovieDetail(json.data.movie);
     setLoading(false);
   }, [id]);
 
   useEffect(() => {
     getMovieDetail();
-  }, [getMovieDetail]);
+  }, []);
   return (
     <div>
       {loading ? (
         <h1>Loading...</h1>
       ) : (
         <div>
-          <h1>Detail</h1>
-          {movieDetail &&
-            movieDetail.map((movie) => (
-              <Movie
-                key={movie.id}
-                id={movie.id}
-                coverImg={movie.medium_cover_image}
-                title={movie.title}
-                summary={movie.summary}
-                genres={movie.genres}
-              />
+          <h1>
+            {movieDetail.title} ({movieDetail.year})
+          </h1>
+          <img src={movieDetail.medium_cover_image}></img>
+          <div>
+            {movieDetail.genres.map((g) => (
+              <strong key={g}>-{g} </strong>
             ))}
+          </div>
+          <p>{movieDetail.runtime}m</p>
+          <p>Rating : {movieDetail.rating}</p>
+          <p>&#128150; Like : {movieDetail.like_count}</p>
+          <p>{movieDetail.description_intro}</p>
+          <p>
+            <a href={movieDetail.url}>Download Movie</a>
+          </p>
         </div>
       )}
     </div>
