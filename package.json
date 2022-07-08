@@ -12,6 +12,12 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^5.3.0",
     "react-scripts": "5.0.1",
+    "react-scroll-horizontal": "^1.6.6",
+    "react-scroll-ondrag": "^3.0.0",
+    "react-sortablejs": "^6.1.4",
+    "sortablejs": "^1.15.0",
+    "styled-components": "5.3.5",
+    "swiper": "^8.3.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -40,5 +46,8 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "http://hi-rachel.github.io/react-movie"
+  "homepage": "http://hi-rachel.github.io/react-movie",
+  "devDependencies": {
+    "@types/sortablejs": "^1.13.0"
+  }
 }

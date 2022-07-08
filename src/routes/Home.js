@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
 import Movie from "../components/Movie";
+import styles from "../css/Home.module.css";
+import Img from "../img/github.png";
+
+console.log(Img);
 
 function Home() {
   const [loading, setLoading] = useState(true);
@@ -10,35 +14,54 @@ function Home() {
         `https://yts.mx/api/v2/list_movies.json?minimum_rating=9.0&sort_by=year`
       )
     ).json();
-    // const json = await response.json();
     setMovies(json.data.movies);
     setLoading(false);
-    //   .then((response) => response.json())
-    //   .then((json) => {
-    //     setMovies(json.data.movies);
-    //     setLoading(false);
   };
   useEffect(() => {
     getMovies();
   }, []);
-  // 빈배열은 아무것도 주시하고 있지 않다는 뜻. 오직 한번만 실행하고 싶어서 쓰는 함수
   return (
     <div>
       {loading ? (
-        <h1>Loading...</h1>
-      ) : (
-        <div>
-          {movies.map((movie) => (
-            <Movie
-              key={movie.id}
-              id={movie.id}
-              coverImg={movie.medium_cover_image}
-              title={movie.title}
-              summary={movie.summary}
-              genres={movie.genres}
-            />
-          ))}
+        <div className={styles.loading_page}>
+          <h1 id="loading">Loading...&#127916;</h1>
         </div>
+      ) : (
+        <>
+          <div className={styles.home_header}>
+            <h2 className={styles.home_header_left}>
+              Movies with a rating of 9.0 or higher &#127942;
+            </h2>
+            <div className={styles.home_header_right}>
+              <a
+                href="https://github.com/hi-rachel/react-movie.git"
+                alt="hi-rachel git-hub"
+                target="_blank"
+              >
+                <img
+                  className={styles.git_logo}
+                  src={
+                    "/react-movie/static/media/github.4ad10c7de2748bcc606b.png"
+                  }
+                  alt="git-hub logo"
+                />
+                <p className={styles.home_codeLink}>hi-rachel</p>
+              </a>
+            </div>
+          </div>
+          <div className={styles.home_align}>
+            {movies.map((movie) => (
+              <Movie
+                key={movie.id}
+                id={movie.id}
+                coverImg={movie.medium_cover_image}
+                title={movie.title}
+                summary={movie.summary}
+                genres={movie.genres}
+              />
+            ))}
+          </div>
+        </>
       )}
     </div>
   );

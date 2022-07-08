@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
-import { Link, useParams } from "react-router-dom";
-import Movie from "../components/Movie";
+import { useParams } from "react-router-dom";
+import styles from "../css/Detail.module.css";
 
 function Detail() {
   const [loading, setLoading] = useState(true);
@@ -21,25 +21,58 @@ function Detail() {
   return (
     <div>
       {loading ? (
-        <h1>Loading...</h1>
+        <div className={styles.loading_detail}>
+          <h1>Loading...&#127871;{movieDetail.title}</h1>
+        </div>
       ) : (
-        <div>
-          <h1>
-            {movieDetail.title} ({movieDetail.year})
-          </h1>
-          <img src={movieDetail.medium_cover_image}></img>
-          <div>
-            {movieDetail.genres.map((g) => (
-              <strong key={g}>-{g} </strong>
-            ))}
+        <div className={styles.movie_detail}>
+          <div className={styles.detail_left}>
+            <h1 className={styles.detail_title}>
+              {movieDetail.title} ({movieDetail.year})
+            </h1>
+            <img
+              className={styles.detail_img}
+              src={movieDetail.large_cover_image}
+            ></img>
           </div>
-          <p>{movieDetail.runtime}m</p>
-          <p>Rating : {movieDetail.rating}</p>
-          <p>&#128150; Like : {movieDetail.like_count}</p>
-          <p>{movieDetail.description_intro}</p>
-          <p>
-            <a href={movieDetail.url}>Download Movie</a>
-          </p>
+          <div className={styles.detail_right}>
+            <div className={styles.detail_detail}>
+              <p>
+                <b>Running Time: {movieDetail.runtime}m</b>
+              </p>
+              <p>
+                <b>Rating : {movieDetail.rating} / 10</b>
+              </p>
+              <p>
+                <b>Like : {movieDetail.like_count} &#128154;</b>
+              </p>
+            </div>
+            <p className={styles.detail_description}>
+              {movieDetail.description_full}
+            </p>
+            <div>
+              {movieDetail.genres.map((g) => (
+                <a
+                  className={styles.movie_genres}
+                  href="#"
+                  title="Movie Genres"
+                  key={g}
+                >
+                  {g}
+                </a>
+              ))}
+            </div>
+            <p>
+              <a
+                className={styles.yts}
+                href={movieDetail.url}
+                alt="Download Movie"
+                target="_blank"
+              >
+                Download Movie
+              </a>
+            </p>
+          </div>
         </div>
       )}
     </div>
