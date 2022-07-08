@@ -29,6 +29,7 @@ body {
   margin-right: 20px;
   padding: 10px;
   white-space: nowrap;
+  max-height: 25px;
 }
 
 .home_codeLink {
