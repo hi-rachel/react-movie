@@ -1,6 +1,8 @@
 @import url(https://fonts.googleapis.com/css?family=Press+Start+2P);
 
 body {
+  width: auto;
+  height: 100vh;
   margin: 0;
   background-color: #141414;
   color: white;
@@ -50,6 +52,7 @@ body {
   display: flex;
   overflow-x: scroll;
   gap: 20px;
+  padding-bottom: 80px;
 }
 
 /* width */
